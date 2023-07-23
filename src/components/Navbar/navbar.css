@@ -1,0 +1,27 @@
+.navbar {
+  background-color: white;
+  height: 100px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.container {
+  height: 100%;
+}
+
+.navbar-brand {
+  height: 100%;
+}
+
+.navbarImage {
+  height: 100%;
+  width: 100%;
+}
+
+.navlinks > li {
+  list-style: none;
+}
+
+.navbarButtons {
+  display: flex;
+  gap: 20px;
+}

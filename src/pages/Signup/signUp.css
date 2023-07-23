@@ -1,0 +1,11 @@
+.login-background {
+  background-image: url("../../assets/blur-hospital.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.login-card {
+  width: 450px;
+  padding: 30px;
+}

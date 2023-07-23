@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import client from "../../client/client";
+import Navbar from "../../components/Navbar/Navbar";
+import HeroSection from "../../components/HeroSection/HeroSection";
 
 const Homepage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -13,9 +15,11 @@ const Homepage = () => {
   };
   return (
     <div>
-      {doctors.map((doctor, key) => {
+      <Navbar />
+      <HeroSection />
+      {/* {doctors.map((doctor, key) => {
         return <p key={key}>{doctor.name}</p>;
-      })}
+      })} */}
     </div>
   );
 };

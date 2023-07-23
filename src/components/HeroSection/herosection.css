@@ -1,0 +1,33 @@
+.herosection {
+  height: calc(100vh - 100px);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  padding-bottom: 0px !important;
+}
+
+.cta_section {
+  .hero_title {
+    font-size: 50px;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+
+  .hero_subtitle {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+}
+
+.cta_btn {
+  padding: 20px 25px;
+  border: none;
+  border-radius: 50px;
+}
+
+.image_section {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
