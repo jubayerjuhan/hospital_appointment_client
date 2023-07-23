@@ -1,0 +1,16 @@
+.card_wrapper {
+  width: 300px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.image_wrapper {
+  height: 300px;
+}
+
+.card_image {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}

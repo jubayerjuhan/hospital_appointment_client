@@ -1,10 +1,14 @@
 import DoctorsList from "../../components/DoctorsList/DoctorsList";
+import Navbar from "../../components/Navbar/Navbar";
 
 const BookAppointment = () => {
   return (
-    <div>
-      <DoctorsList />
-    </div>
+    <>
+      <Navbar />
+      <div className="sectionPadding">
+        <DoctorsList />
+      </div>
+    </>
   );
 };
 
