@@ -2,8 +2,10 @@ import { useState } from "react";
 import client from "../../client/client";
 import "./login.css";
 import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({});
 
   const handleFieldChange = (e) => {
@@ -17,6 +19,7 @@ const Login = () => {
       const { data } = await client.post("user/login", credentials);
 
       localStorage.setItem("accessToken", JSON.stringify(data.token));
+      dispatch({ type: "LOGIN_SUCCESS", payload: data.user });
       window.location.href = "/";
     } catch (error) {
       toast.error(error.response.data.message);

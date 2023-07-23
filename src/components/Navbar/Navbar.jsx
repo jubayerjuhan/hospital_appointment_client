@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import logo from "../../assets/logo.png";
+import { BiUserCircle } from "react-icons/bi";
 import "./navbar.css";
 
 const Navbar = () => {
+  const { loggedIn, user } = useSelector((state) => state.user);
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
@@ -24,24 +27,31 @@ const Navbar = () => {
         </ul>
 
         {/* Right Aligned Link */}
-        <ul className="navbar-nav navbarButtons">
-          <li className="nav-item">
-            <button
-              className="btn btn-primary"
-              onClick={() => (window.location.href = "/login")}
-            >
-              Login
-            </button>
-          </li>
-          <li className="nav-item">
-            <button
-              className="btn btn-info"
-              onClick={() => (window.location.href = "/sign-up")}
-            >
-              Sign Up
-            </button>
-          </li>
-        </ul>
+        {loggedIn ? (
+          <div className="d-flex align-items-center">
+            <BiUserCircle size={40} className="text-primary mr-2" />
+            <p className="mb-0 text-muted">{user?.name}</p>
+          </div>
+        ) : (
+          <ul className="navbar-nav navbarButtons">
+            <li className="nav-item">
+              <button
+                className="btn btn-primary"
+                onClick={() => (window.location.href = "/login")}
+              >
+                Login
+              </button>
+            </li>
+            <li className="nav-item">
+              <button
+                className="btn btn-info"
+                onClick={() => (window.location.href = "/sign-up")}
+              >
+                Sign Up
+              </button>
+            </li>
+          </ul>
+        )}
       </div>
     </nav>
   );

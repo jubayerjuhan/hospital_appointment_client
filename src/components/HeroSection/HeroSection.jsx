@@ -12,7 +12,12 @@ const HeroSection = () => {
           Find and Schedule Appointments with Top Specialists
         </p>
 
-        <button className="cta_btn btn-primary">Book Appointment</button>
+        <button
+          className="cta_btn btn-primary"
+          onClick={() => (window.location.href = "/book-appointment")}
+        >
+          Book Appointment
+        </button>
       </div>
       <div className="image_section">
         <img src={heroImage} alt="doctor" />
