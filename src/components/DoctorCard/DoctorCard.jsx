@@ -1,7 +1,6 @@
 import "./doctorCard.css";
 
-const DoctorCard = ({ doctor }) => {
-  console.log(doctor);
+const DoctorCard = ({ doctor, setOpen, setSelectedDoctor }) => {
   return (
     <div className="card_wrapper">
       <div className="image_wrapper">
@@ -22,7 +21,15 @@ const DoctorCard = ({ doctor }) => {
         <p className="card-text">
           Experience: {doctor.experience || "10 years"}
         </p>
-        <button className="btn btn-primary">Book Appointment</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            setOpen(true);
+            setSelectedDoctor(doctor._id);
+          }}
+        >
+          Book Appointment
+        </button>
       </div>
     </div>
   );
