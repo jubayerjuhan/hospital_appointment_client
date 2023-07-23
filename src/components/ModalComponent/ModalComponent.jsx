@@ -3,13 +3,15 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import client from "../../client/client";
 import { useSelector } from "react-redux";
+import dayjs from "dayjs";
 
 const ModalComponent = ({ open, setOpen, selectedDoctor }) => {
   const { user, loggedIn } = useSelector((state) => state.user);
+  const [appointments, setAppointments] = useState([]);
   const [appointment, setAppointment] = useState({});
 
   const handleClose = () => {
@@ -17,6 +19,20 @@ const ModalComponent = ({ open, setOpen, selectedDoctor }) => {
   };
 
   const handleChange = (fieldName, e) => {
+    appointments.map((appointment) => {
+      console.log(appointment.doctor._id, selectedDoctor);
+      if (appointment.doctor._id === selectedDoctor) {
+        // console.log(dayjs(appointment.startFrom).format("HH:mm"));
+        if (
+          dayjs(e).format("DD-MM-YYYY HH:mm") ===
+          dayjs(appointment.startFrom).format("DD-MM-YYYY HH:mm")
+        )
+          return toast.error(
+            "The Doctor Doesnot Have a Empty Slot, On The Time You Selected"
+          );
+      }
+    });
+
     setAppointment({ ...appointment, [fieldName]: e });
   };
 
@@ -47,6 +63,20 @@ const ModalComponent = ({ open, setOpen, selectedDoctor }) => {
       }
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message);
+    }
+  };
+
+  // fetch all apppointment
+  useEffect(() => {
+    fetchAllAppointments();
+  }, []);
+
+  const fetchAllAppointments = async () => {
+    try {
+      const { data } = await client.get("appointment/get-all-appointments");
+      setAppointments(data.appointments);
+    } catch (error) {
       toast.error(error.response.data.message);
     }
   };

@@ -39,6 +39,12 @@ const Navbar = () => {
                 Admin Panel
               </button>
             )}
+            <button
+              className="btn btn-primary ml-4"
+              onClick={() => (window.location.href = "/my-appointments")}
+            >
+              My Appointments
+            </button>
           </div>
         ) : (
           <ul className="navbar-nav navbarButtons">
