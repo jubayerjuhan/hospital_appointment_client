@@ -9,7 +9,7 @@ import client from "../../client/client";
 import { useSelector } from "react-redux";
 
 const ModalComponent = ({ open, setOpen, selectedDoctor }) => {
-  const { user } = useSelector((state) => state.user);
+  const { user, loggedIn } = useSelector((state) => state.user);
   const [appointment, setAppointment] = useState({});
 
   const handleClose = () => {
@@ -21,6 +21,10 @@ const ModalComponent = ({ open, setOpen, selectedDoctor }) => {
   };
 
   const handleSubmit = () => {
+    if (!loggedIn) window.location.href = "/login";
+
+    if (!appointment.startFrom || !appointment.endTo)
+      return toast.error("Select Appointment Time");
     const diffInHours = appointment.endTo.diff(appointment.startFrom, "hour");
 
     if (diffInHours > 1)
@@ -42,6 +46,7 @@ const ModalComponent = ({ open, setOpen, selectedDoctor }) => {
         handleClose();
       }
     } catch (error) {
+      console.log(error);
       toast.error(error.response.data.message);
     }
   };

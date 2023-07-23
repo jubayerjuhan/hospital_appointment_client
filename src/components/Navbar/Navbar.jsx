@@ -31,6 +31,14 @@ const Navbar = () => {
           <div className="d-flex align-items-center">
             <BiUserCircle size={40} className="text-primary mr-2" />
             <p className="mb-0 text-muted">{user?.name}</p>
+            {user.role === "admin" && (
+              <button
+                className="btn btn-info ml-4"
+                onClick={() => (window.location.href = "/all-appointments")}
+              >
+                Admin Panel
+              </button>
+            )}
           </div>
         ) : (
           <ul className="navbar-nav navbarButtons">
