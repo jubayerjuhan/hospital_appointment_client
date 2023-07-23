@@ -18,7 +18,9 @@ const ModalComponent = ({ open, setOpen, selectedDoctor }) => {
     setOpen(false);
   };
 
-  const handleChange = (fieldName, e) => {
+  // slotChecker
+
+  const slotChecker = (e) => {
     appointments.map((appointment) => {
       console.log(appointment.doctor._id, selectedDoctor);
       if (appointment.doctor._id === selectedDoctor) {
@@ -27,17 +29,25 @@ const ModalComponent = ({ open, setOpen, selectedDoctor }) => {
           dayjs(e).format("DD-MM-YYYY HH:mm") ===
           dayjs(appointment.startFrom).format("DD-MM-YYYY HH:mm")
         )
-          return toast.error(
+          toast.error(
             "The Doctor Doesnot Have a Empty Slot, On The Time You Selected"
           );
+        return false;
       }
+      return true;
     });
+  };
 
+  const handleChange = (fieldName, e) => {
     setAppointment({ ...appointment, [fieldName]: e });
+    slotChecker(e);
   };
 
   const handleSubmit = () => {
     if (!loggedIn) window.location.href = "/login";
+    const slotAvailable = slotChecker(appointment.startFrom);
+
+    if (!slotAvailable) return;
 
     if (!appointment.startFrom || !appointment.endTo)
       return toast.error("Select Appointment Time");
