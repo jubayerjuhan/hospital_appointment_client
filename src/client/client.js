@@ -7,10 +7,18 @@ const client = axios.create({
 // Add a request interceptor
 client.interceptors.request.use(
   function (config) {
-    const accessToken = localStorage.getItem("accessToken");
-    console.log(accessToken, "accessToken");
-    if (accessToken) {
-      config.headers["Authorization"] = `Bearer ${JSON.parse(accessToken)}`;
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken) {
+        const parsedToken = JSON.parse(accessToken);
+        if (parsedToken) {
+          config.headers["Authorization"] = `Bearer ${parsedToken}`;
+        } else {
+          console.error("Failed to parse access token");
+        }
+      }
+    } catch (error) {
+      console.error("Error retrieving access token:", error);
     }
     return config;
   },
